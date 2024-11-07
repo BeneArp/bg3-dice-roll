@@ -21,7 +21,11 @@ import { store } from '../store';
 
     <div class="wrapper">
 
-        <div class="dice-container">
+        <div class="dice-container base-container">
+
+            <div class="dice-container overlay-container">
+
+            </div>
 
         </div>
 
@@ -61,15 +65,32 @@ import { store } from '../store';
    
    .wrapper{
         width: 100%;
-        height: 650px;
+        height: 950px;
         background-color: white;
         padding: 1em 0;
 
         .dice-container{
-            width: 80%;
-            height: 600px;
-            background-color: red;
             margin: 0 auto;
+            background: linear-gradient(-210deg, rgba(2,0,36,1) 0%, rgba(51,34,47,1));
+            border-radius: 100px;
+        }
+
+        .base-container{
+            width: 35%;
+            height: 800px;
+            border: 4px solid rgb(151 109 60);
+            position: relative;
+        }
+
+        .overlay-container{
+            width: 140%;
+            height: 600px;
+            border-left: 4px solid rgb(151 109 60);
+            border-right: 4px solid rgb(151 109 60);
+            position: absolute;
+            left: -90%;
+            top: 50%;
+            transform: translate(50%, -50%);
         }
     }
 
