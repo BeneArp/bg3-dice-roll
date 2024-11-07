@@ -96,8 +96,7 @@ import {store} from '../store';
             width: 90%;
 
             &:hover{
-                border: 2px solid rgb(219 194 146);
-                border-radius: 8px;
+                scale: 1.2;
             }
         }
 

@@ -1,17 +1,46 @@
-@import "node_modules/bootstrap/scss/bootstrap.scss";
-
-body {
-    font-family: sans-serif;
-}
-
-img {
-    max-width: 100%;
-}
-
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
+:root {
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: rgb(89, 59, 145);
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  *{
+    color: white;
+    font-family: "Alegreya", serif;
+  }
+  
+  body {
+    margin: 0;
+    // display: flex;
+    // place-items: center;
+    // min-width: 320px;
+    min-height: 100vh;
+  }
+  
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+  
+  
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+    a:hover {
+      color: #747bff;
+    }
+    button {
+      background-color: #f9f9f9;
+    }
+  }
+  

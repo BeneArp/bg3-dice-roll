@@ -1,9 +1,11 @@
 <script>
 
+import Navbar from './components/partials/Navbar.vue';
+
 export default{
     name: 'App',
     components:{
-      
+      Navbar,
     },
 
 }
@@ -12,19 +14,20 @@ export default{
 
 <template>
 
-    <router-view></router-view>
+    <Navbar></Navbar>
+
+    <div class="container">
+        <router-view></router-view>
+    </div>
+    
 
 </template>
 
 <style lang="scss">
 
-    body{
-        background-color: rgb(89, 59, 145);
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .container{
+        max-width: 1280px;
+        margin: 6em auto;
     }
   
 </style>
