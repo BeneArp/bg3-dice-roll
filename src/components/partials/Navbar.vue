@@ -29,9 +29,10 @@
             margin: 0 auto;
             width: fit-content;
             font-size: 18px;
+            transition: all 0.5s;
 
             &:hover{
-                color: rgb(216, 216, 216);
+                color: rgb(219 194 146);
             }
         }
     }

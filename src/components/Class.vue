@@ -24,12 +24,12 @@ import {store} from '../store';
         <img :src="item.logo" :alt="item.name" class="mx-auto">
 
         <div class="hidden info">
-            <h5 class="font-bold mx-auto mb-2"> {{ item.name }} </h5>
+            <h5 class="font-bold mx-auto mt-2 mb-2 text-2xl"> {{ item.name }} </h5>
             <p>{{ item.description }}</p>
             <div class="grid grid-cols-6">
 
                 <span class="font-bold">
-                    <div class="mt-3">
+                    <div class="mt-3 text-yellow-200">
                         FOR
                     </div>
                     <div class="mb-3">
@@ -38,7 +38,7 @@ import {store} from '../store';
                 </span>
 
                 <span class="font-bold">
-                    <div class="mt-3">
+                    <div class="mt-3 text-yellow-200">
                         DES
                     </div>
                     <div class="mb-3">
@@ -47,7 +47,7 @@ import {store} from '../store';
                 </span>
 
                 <span class="font-bold">
-                    <div class="mt-3">
+                    <div class="mt-3 text-yellow-200">
                         COS
                     </div>
                     <div class="mb-3">
@@ -56,7 +56,7 @@ import {store} from '../store';
                 </span>
 
                 <span class="font-bold">
-                    <div class="mt-3">
+                    <div class="mt-3 text-yellow-200">
                         INT
                     </div>
                     <div class="mb-3">
@@ -65,7 +65,7 @@ import {store} from '../store';
                 </span>
 
                 <span class="font-bold">
-                    <div class="mt-3">
+                    <div class="mt-3 text-yellow-200">
                         SAG
                     </div>
                     <div class="mb-3">
@@ -74,7 +74,7 @@ import {store} from '../store';
                 </span>
 
                 <span class="font-bold">
-                    <div class="mt-3">
+                    <div class="mt-3 text-yellow-200">
                         CAR
                     </div>
                     <div class="mb-3">
@@ -94,6 +94,7 @@ import {store} from '../store';
 
         img{
             width: 90%;
+            transition: scale 0.8s;
 
             &:hover{
                 scale: 1.2;
@@ -108,6 +109,7 @@ import {store} from '../store';
             padding: 0.5em 2em;
             z-index: 50;
             width: 400px;
+            text-align: center;
         }
 
         &:hover .info{

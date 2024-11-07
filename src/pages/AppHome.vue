@@ -21,6 +21,8 @@ export default {
 
 <template>
 
+  <h1 class="mb-8 mx-auto w-fit">Scegli una classe</h1>
+
     <div class="rounded-lg w-full main-container p-5 grid grid-cols-4 items-stretch gap-8">
       <Class :classes="classes"></Class>
     </div>
