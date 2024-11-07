@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
     import AppHome from './pages/AppHome.vue';
-    import AppAbout from './pages/AppAbout.vue';
-    import AppContacts from './pages/AppContacts.vue';
+    import AppDice from './pages/AppDice.vue';
+    import AppStats from './pages/AppStats.vue';
     import NotFound from './pages/NotFound.vue';
 
     const router = createRouter({
@@ -13,14 +13,14 @@ import { createRouter, createWebHistory } from 'vue-router';
             component: AppHome
         },
         {
-            path: '/about',
-            name: 'about us',
-            component: AppAbout
+            path: '/roll',
+            name: 'roll',
+            component: AppDice
         },
         {
-            path: '/contacts',
-            name: 'contact me',
-            component: AppContacts
+            path: '/stats',
+            name: 'stats',
+            component: AppStats
         },
         {
             path: '/:pathMatch(.*)*',

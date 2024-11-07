@@ -1,7 +1,14 @@
 <script>
+    import {store} from '../../store';
 
     export default{
         name: 'Navbar',
+        
+        data(){
+            return{
+                
+            }
+        }
     }
 
 </script>
@@ -10,7 +17,15 @@
 
     <header>
         <ul>
-            <router-link :to="{name:home}">Classi</router-link>
+            <li>
+                <router-link :to="{name:'home'}">Classi</router-link>
+            </li>
+            <li>
+                <router-link :to="{name:'stats'}">Statistiche</router-link>
+            </li>
+            <li>
+                <router-link :to="{name:home}">Storico</router-link>
+            </li>
         </ul>
     </header>
 
@@ -29,11 +44,17 @@
             margin: 0 auto;
             width: fit-content;
             font-size: 18px;
-            transition: all 0.5s;
+            display: flex;
+            gap: 3em;
 
-            &:hover{
-                color: rgb(219 194 146);
+            li{
+                transition: all 0.5s;
+
+                    &:hover{
+                    color: rgb(219 194 146);
+                }
             }
+
         }
     }
 

@@ -8,11 +8,25 @@ import {store} from '../store';
             classes: Object
         },
 
+        data(){
+            return{
+                userClass: {},
+            }
+        },
+
+        methods:{
+            getUserClass(item){
+                this.userClass = item;
+                store.userClass = this.userClass;
+                //console.log(store.userClass);
+                
+            }
+            
+        },
+
         mounted(){
             this.classes = store.classes;
-            console.log(this.classes);
-            
-            
+            //console.log(this.classes);            
         }
     }
 
@@ -20,7 +34,7 @@ import {store} from '../store';
 
 <template>
 
-    <div v-for="item in this.classes" class="logo">
+    <div v-for="item in this.classes" class="logo" @click="this.getUserClass(item)">
         <img :src="item.logo" :alt="item.name" class="mx-auto">
 
         <div class="hidden info">
@@ -95,6 +109,7 @@ import {store} from '../store';
         img{
             width: 90%;
             transition: scale 0.8s;
+            cursor: pointer;
 
             &:hover{
                 scale: 1.2;
@@ -110,6 +125,7 @@ import {store} from '../store';
             z-index: 50;
             width: 400px;
             text-align: center;
+            cursor: default;
         }
 
         &:hover .info{

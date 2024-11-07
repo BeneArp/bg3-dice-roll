@@ -180,5 +180,9 @@ export const store = {
 
         },
 
-    ]
+    ],
+
+    userClass: {},
+
+    userStat: '',
 }

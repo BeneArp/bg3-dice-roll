@@ -9,10 +9,10 @@ export default {
     },
 
     data(){
-        return{
-            classes: store.classes,
-        }
-        
+      return{
+          classes: store.classes,
+      }
+      
     }
 }
 
