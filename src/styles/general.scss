@@ -4,7 +4,10 @@
   
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: rgb(89, 59, 145);
+    background-image: url("/img/background.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    //background-color: rgb(89, 59, 145);
   
     font-synthesis: none;
     text-rendering: optimizeLegibility;

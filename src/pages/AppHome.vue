@@ -31,7 +31,7 @@ export default {
 <style scoped lang="scss">
  .main-container{
     background: rgb(24,20,14);
-    background: radial-gradient(circle, rgba(24,20,14,1) 0%, rgba(7,7,4,1) 100%);
+    background: radial-gradient(circle, rgba(24,20,14,0.8) 0%, rgba(7,7,4,0.8) 100%);
     border-top: 2px solid rgb(219 194 146);
     border-bottom: 2px solid rgb(219 194 146);
   }
