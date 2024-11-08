@@ -34,70 +34,75 @@ import {store} from '../store';
 
 <template>
 
-    <router-link :to="{name:'stats'}" v-for="item in this.classes" class="logo" @click="this.getUserClass(item)">
-        <img :src="item.logo" :alt="item.name" class="mx-auto">
+    <router-link :to="{name:'stats'}" v-for="item in this.classes" class="logo">
 
-        <div class="hidden info">
-            <h5 class="font-bold mx-auto mt-2 mb-2 text-2xl"> {{ item.name }} </h5>
-            <p>{{ item.description }}</p>
-            <div class="grid grid-cols-6">
+        <div @click="this.getUserClass(item)">
 
-                <span class="font-bold">
-                    <div class="mt-3 text-yellow-200">
-                        FOR
-                    </div>
-                    <div class="mb-3">
-                        {{ item.stats.forza }}
-                    </div>
-                </span>
+            <img :src="item.logo" :alt="item.name" class="mx-auto">
 
-                <span class="font-bold">
-                    <div class="mt-3 text-yellow-200">
-                        DES
-                    </div>
-                    <div class="mb-3">
-                        {{ item.stats.destrezza }}
-                    </div>
-                </span>
+            <div class="hidden info">
+                <h5 class="font-bold mx-auto mt-2 mb-2 text-2xl"> {{ item.name }} </h5>
+                <p>{{ item.description }}</p>
+                <div class="grid grid-cols-6">
 
-                <span class="font-bold">
-                    <div class="mt-3 text-yellow-200">
-                        COS
-                    </div>
-                    <div class="mb-3">
-                        {{ item.stats.costituzione }}
-                    </div>
-                </span>
+                    <span class="font-bold">
+                        <div class="mt-3 text-yellow-200">
+                            FOR
+                        </div>
+                        <div class="mb-3">
+                            {{ item.stats.forza }}
+                        </div>
+                    </span>
 
-                <span class="font-bold">
-                    <div class="mt-3 text-yellow-200">
-                        INT
-                    </div>
-                    <div class="mb-3">
-                        {{ item.stats.intelligenza }}
-                    </div>
-                </span>
+                    <span class="font-bold">
+                        <div class="mt-3 text-yellow-200">
+                            DES
+                        </div>
+                        <div class="mb-3">
+                            {{ item.stats.destrezza }}
+                        </div>
+                    </span>
 
-                <span class="font-bold">
-                    <div class="mt-3 text-yellow-200">
-                        SAG
-                    </div>
-                    <div class="mb-3">
-                        {{ item.stats.saggezza }}
-                    </div>
-                </span>
+                    <span class="font-bold">
+                        <div class="mt-3 text-yellow-200">
+                            COS
+                        </div>
+                        <div class="mb-3">
+                            {{ item.stats.costituzione }}
+                        </div>
+                    </span>
 
-                <span class="font-bold">
-                    <div class="mt-3 text-yellow-200">
-                        CAR
-                    </div>
-                    <div class="mb-3">
-                        {{ item.stats.carisma }}
-                    </div>
-                </span>
+                    <span class="font-bold">
+                        <div class="mt-3 text-yellow-200">
+                            INT
+                        </div>
+                        <div class="mb-3">
+                            {{ item.stats.intelligenza }}
+                        </div>
+                    </span>
 
+                    <span class="font-bold">
+                        <div class="mt-3 text-yellow-200">
+                            SAG
+                        </div>
+                        <div class="mb-3">
+                            {{ item.stats.saggezza }}
+                        </div>
+                    </span>
+
+                    <span class="font-bold">
+                        <div class="mt-3 text-yellow-200">
+                            CAR
+                        </div>
+                        <div class="mb-3">
+                            {{ item.stats.carisma }}
+                        </div>
+                    </span>
+
+                </div>
             </div>
         </div>
+
     </router-link>
 
 </template>
