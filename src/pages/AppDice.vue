@@ -15,6 +15,7 @@ import { store } from '../store';
                 // transitionDuration: 500,
                 // animationDuration: 3000,
                 rolling: false,
+                loading: true,
             }
         },
 
@@ -55,6 +56,7 @@ import { store } from '../store';
             console.log(store.userStat);
             this.pcNumber = Math.floor((Math.random() * 20) + 1);
             this.randomFace;
+            setTimeout(() => this.loading = false, 1000);
         }
     }
 
@@ -62,7 +64,11 @@ import { store } from '../store';
 
 <template>
 
-    <div class="wrapper">
+    <div class="loader-container" v-if="this.loading">
+      <span class="loader"></span>
+    </div>
+
+    <div class="wrapper" v-else>
 
         <div class="text-center font-bold text-3xl mb-12">
             <h2>PROVA DI</h2>
@@ -116,10 +122,6 @@ import { store } from '../store';
 <style lang="scss" scoped>
    
    .wrapper{
-        // width: 100%;
-        // height: 950px;
-        //background-color: white;
-        padding: 1em 0;
         cursor: default;
         font-family: "Alegreya Sans", sans-serif !important;
         font-weight: 700 !important;
@@ -360,5 +362,56 @@ import { store } from '../store';
         }
 
     }
+
+
+    // loader
+    .loader-container{
+    width: 100%;
+    height: 70vh;
+    align-items: center;
+    display: flex;
+
+    .loader {
+        // width: 48px;
+        // height: 48px;
+        margin: 0 auto;
+        display: inline-block;
+        position: relative;
+    }
+    .loader::after,
+    .loader::before {
+        content: '';  
+        box-sizing: border-box;
+        width: 80px;
+        height: 80px;
+        border: 2px solid rgba(120,116,140,1);
+        position: absolute;
+        left: 0;
+        top: 0;
+        animation: rotationBreak 3s ease-in-out infinite alternate;
+    }
+    .loader::after {
+        border-color: rgb(219 194 146);
+        animation-direction: alternate-reverse;
+    }
+
+    @keyframes rotationBreak {
+      0% {
+          transform: rotate(0);
+      }
+      25% {
+          transform: rotate(90deg);
+      }
+      50% {
+          transform: rotate(180deg);
+      }
+      75% {
+          transform: rotate(270deg);
+      }
+      100% {
+          transform: rotate(360deg);
+      }
+    }
+  }
 
 </style>
