@@ -5,7 +5,16 @@ import { store } from '../store';
         name: "AppAbout",
         data(){
             return{
-                
+                stat: store.userStat.toUpperCase(),
+                pcNumber: 0,
+                userNumber: 1,
+                // sides: 20,
+                // initialSide: 1,
+                // lastFace: undefined,
+                // // timeoutId: undefined,
+                // transitionDuration: 500,
+                // animationDuration: 3000,
+                rolling: false,
             }
         },
 
@@ -14,9 +23,38 @@ import { store } from '../store';
 
         },
 
+        methods:{
+            rollDice(){
+                this.rolling = true;
+                this.userNumber = Math.floor((Math.random() * 20) + 1);
+                this.rolling = false
+            }
+
+            // randomFace() {
+            //     var face = Math.floor(Math.random() * sides) + initialSide;
+            //     this.lastFace = face == lastFace ? randomFace() : face;
+            //     return face;
+            // },
+
+            // getNumber(){
+            //     this.rolling = true;
+            //     clearTimeout(timeoutId);
+
+            //     var timeoutId = setTimeout(function () {
+            //         this.rolling = false;
+
+            //         rollTo(randomFace());
+            //     }, this.animationDuration);
+
+            //     return false;
+            // }
+        },
+
         mounted(){
             console.log(store.userClass);
-            console.log(store.userStat); 
+            console.log(store.userStat);
+            this.pcNumber = Math.floor((Math.random() * 20) + 1);
+            this.randomFace;
         }
     }
 
@@ -26,12 +64,24 @@ import { store } from '../store';
 
     <div class="wrapper">
 
+        <div class="text-center font-bold text-3xl mb-12">
+            <h2>PROVA DI</h2>
+            <h2>{{ stat }}</h2>
+        </div>
+
+
         <div class="dice-container base-container">
 
-            <div class="dice-container overlay-container">
+            <div class="text-center font-bold text-3xl">
+                <h2>CLASSE</h2>
+                <h2>DIFFICOLTÀ</h2>
+                <div class="text-7xl">
+                    {{ pcNumber }}
+                </div>
+            </div>
 
-                <div class="content">
-                    <div class="die">
+            <div class="content">
+                    <div class="die" :class="rolling ? 'rolling' : ''" @click="this.rollDice" :data-face="userNumber">
                         <figure class="face face-1"></figure>
                         <figure class="face face-2"></figure>
                         <figure class="face face-3"></figure>
@@ -55,7 +105,7 @@ import { store } from '../store';
                     </div>
                 </div>
 
-            </div>
+            <div class="dice-container overlay-container"></div>
 
         </div>
 
@@ -66,10 +116,13 @@ import { store } from '../store';
 <style lang="scss" scoped>
    
    .wrapper{
-        width: 100%;
-        height: 950px;
+        // width: 100%;
+        // height: 950px;
         //background-color: white;
         padding: 1em 0;
+        cursor: default;
+        font-family: "Alegreya Sans", sans-serif !important;
+        font-weight: 700 !important;
 
         .dice-container{
             margin: 0 auto;
@@ -79,20 +132,23 @@ import { store } from '../store';
 
         .base-container{
             width: 35%;
-            height: 800px;
-            border: 4px solid rgb(187, 166, 73);
+            height: 850px;
+            border-top: 4px solid rgb(187, 166, 73);
+            border-bottom: 4px solid rgb(187, 166, 73);
             position: relative;
+            border-radius: 300px;
+            padding: 4em 0;
         }
 
         .overlay-container{
             width: 140%;
             height: 600px;
-            border-left: 4px solid rgb(187, 166, 73);
-            border-right: 4px solid rgb(187, 166, 73);
+            border: 4px solid rgb(187, 166, 73);
             position: absolute;
             left: -90%;
             top: 50%;
             transform: translate(50%, -50%);
+            z-index: -10;
         }
 
 
@@ -122,13 +178,13 @@ import { store } from '../store';
         $translateLowerZ: $translateZ;
         $translateLowerY: $faceHeight*0.78 + $translateRingY;
 
-        // @keyframes roll {
-        //     10% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) }
-        //     30% { transform: rotateX(120deg) rotateY(240deg) rotateZ(0deg) translateX(40px) translateY(40px) }
-        //     50% { transform: rotateX(240deg) rotateY(480deg) rotateZ(0deg) translateX(-40px) translateY(-40px) }
-        //     70% { transform: rotateX(360deg) rotateY(720deg) rotateZ(0deg) }
-        //     90% { transform: rotateX(480deg) rotateY(960deg) rotateZ(0deg) }
-        // }
+        @keyframes roll {
+            10% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) }
+            30% { transform: rotateX(120deg) rotateY(240deg) rotateZ(0deg) translateX(40px) translateY(40px) }
+            50% { transform: rotateX(240deg) rotateY(480deg) rotateZ(0deg) translateX(-40px) translateY(-40px) }
+            70% { transform: rotateX(360deg) rotateY(720deg) rotateZ(0deg) }
+            90% { transform: rotateX(480deg) rotateY(960deg) rotateZ(0deg) }
+        }
 
         body {
             background: #333;
@@ -136,7 +192,7 @@ import { store } from '../store';
         }
 
         .content {
-            margin: 28% auto;
+            margin: 20% auto;
             position: relative;
             width: $containerWidth;
             height: $containerHeight;
@@ -153,9 +209,9 @@ import { store } from '../store';
             
             transform: rotateX($rotateX);
             
-            // &.rolling {
-            //     animation: roll $animationDuration linear;
-            // }
+            &.rolling {
+                animation: roll 300 linear;
+            }
             
             @for $i from 1 through 5 {
                 &[data-face="#{$i}"] {
