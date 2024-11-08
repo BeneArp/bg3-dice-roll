@@ -27,6 +27,11 @@ import { store } from '../store';
                 store.userStat = this.userStat;
                 console.log(store.userStat);
             }
+        },
+
+        mounted(){
+            console.log(store.userClass);
+            
         }
     }
 
@@ -36,11 +41,16 @@ import { store } from '../store';
 
 <h1 class="mb-8 mx-auto w-fit">Scegli la statisica su cui effettuare il tiro</h1>
 
-    <div class="rounded-lg w-full main-container p-5 pt-10 pb-10 grid grid-cols-3 items-stretch gap-8 text-center">
+    <div class="rounded-lg w-full main-container p-5 pt-10 pb-10  items-stretch gap-8 text-center">
     
-        <h2 class="font-bold text-3xl" v-for="stat in this.stats" @click="this.getUserStat(stat)">{{ stat }}</h2>
-        <h2 class="font-bold text-3xl col-span-3" @click="this.randomStat">Casuale</h2>
-
+        <router-link :to="{name:'roll'}" class="grid grid-cols-3">
+            <h2 class="font-bold text-3xl" v-for="stat in this.stats" @click="this.getUserStat(stat)">{{ stat }}</h2>
+        </router-link>
+        
+        <router-link :to="{name:'roll'}">
+            <h2 class="font-bold text-3xl" @click="this.randomStat">Casuale</h2>
+        </router-link>
+        
     </div>
 
 </template>

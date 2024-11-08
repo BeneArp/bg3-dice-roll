@@ -18,7 +18,7 @@ import {store} from '../store';
             getUserClass(item){
                 this.userClass = item;
                 store.userClass = this.userClass;
-                //console.log(store.userClass);
+                console.log(store.userClass);
                 
             }
             
@@ -34,7 +34,7 @@ import {store} from '../store';
 
 <template>
 
-    <div v-for="item in this.classes" class="logo" @click="this.getUserClass(item)">
+    <router-link :to="{name:'stats'}" v-for="item in this.classes" class="logo" @click="this.getUserClass(item)">
         <img :src="item.logo" :alt="item.name" class="mx-auto">
 
         <div class="hidden info">
@@ -98,7 +98,7 @@ import {store} from '../store';
 
             </div>
         </div>
-    </div>
+    </router-link>
 
 </template>
 
