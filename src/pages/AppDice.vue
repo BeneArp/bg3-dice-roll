@@ -16,9 +16,7 @@ import { store } from '../store';
 
         mounted(){
             console.log(store.userClass);
-            console.log(store.userStat);
-            
-            
+            console.log(store.userStat); 
         }
     }
 
@@ -70,7 +68,7 @@ import { store } from '../store';
    .wrapper{
         width: 100%;
         height: 950px;
-        background-color: white;
+        //background-color: white;
         padding: 1em 0;
 
         .dice-container{
@@ -82,15 +80,15 @@ import { store } from '../store';
         .base-container{
             width: 35%;
             height: 800px;
-            border: 4px solid rgb(151 109 60);
+            border: 4px solid rgb(187, 166, 73);
             position: relative;
         }
 
         .overlay-container{
             width: 140%;
             height: 600px;
-            border-left: 4px solid rgb(151 109 60);
-            border-right: 4px solid rgb(151 109 60);
+            border-left: 4px solid rgb(187, 166, 73);
+            border-right: 4px solid rgb(187, 166, 73);
             position: absolute;
             left: -90%;
             top: 50%;
