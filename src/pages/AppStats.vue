@@ -8,6 +8,7 @@ import { store } from '../store';
             return{
                 stats: ['Forza', 'Destrezza', 'Costituzione', 'Intelligenza', 'Saggezza', 'Carisma'],
                 userStat: '',
+                userClass: store.userClass,
                 loading: true,
             }
         },  
@@ -49,6 +50,12 @@ import { store } from '../store';
         <h1 class="mb-8 mx-auto w-fit">Scegli la statisica su cui effettuare il tiro</h1>
 
         <div class="rounded-lg w-full main-container p-5 pt-10 pb-10  items-stretch gap-8 text-center">
+
+            <div class="overlay" :class="Object.keys( this.userClass ).length == 0 ? '' : 'hidden'">
+                <router-link :to="{name:'home'}">
+                    <h2>Prima di selezionare una statistica è necessario scegliere una classe</h2>
+                </router-link>
+            </div>
         
             <router-link :to="{name:'roll'}" class="grid grid-cols-3">
                 <h2 class="font-bold text-3xl" v-for="stat in this.stats" @click="this.getUserStat(stat)">{{ stat }}</h2>
@@ -71,6 +78,7 @@ import { store } from '../store';
     background: radial-gradient(circle, rgba(24,20,14,0.8) 0%, rgba(7,7,4,0.8) 100%);
     border-top: 2px solid rgb(219 194 146);
     border-bottom: 2px solid rgb(219 194 146);
+    position: relative;
 
     h2{
         cursor: pointer;
@@ -81,6 +89,14 @@ import { store } from '../store';
             color: rgb(219 194 146);
         }
     }
+  }
+
+  .overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
   }
 
   .loader-container{

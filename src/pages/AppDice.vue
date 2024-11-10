@@ -28,7 +28,7 @@ import { store } from '../store';
             rollDice(){
                 this.rolling = true;
                 this.userNumber = Math.floor((Math.random() * 20) + 1);
-                this.rolling = false
+                setTimeout(() => this.rolling = false, 2000);
             }
 
             // randomFace() {
@@ -87,7 +87,7 @@ import { store } from '../store';
             </div>
 
             <div class="content">
-                    <div class="die" :class="rolling ? 'rolling' : ''" @click="this.rollDice" :data-face="userNumber">
+                    <div class="die" :class = "(this.rolling) ? 'roll' : ''" @click="this.rollDice" :data-face="userNumber">
                         <figure class="face face-1"></figure>
                         <figure class="face face-2"></figure>
                         <figure class="face face-3"></figure>
@@ -145,7 +145,7 @@ import { store } from '../store';
         .overlay-container{
             width: 140%;
             height: 600px;
-            border: 4px solid rgb(187, 166, 73);
+            border: 2px solid rgb(187, 166, 73);
             position: absolute;
             left: -90%;
             top: 50%;
@@ -180,10 +180,24 @@ import { store } from '../store';
         $translateLowerZ: $translateZ;
         $translateLowerY: $faceHeight*0.78 + $translateRingY;
 
-        @keyframes roll {
+        // @keyframes roll {
+        //     10% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) }
+        //     100% { transform: rotateX(120deg) rotateY(240deg) rotateZ(0deg) }
+        //     50% { transform: rotateX(240deg) rotateY(480deg) rotateZ(0deg) translateX(-40px) translateY(-40px) }
+        //     70% { transform: rotateX(360deg) rotateY(720deg) rotateZ(0deg) }
+        //     90% { transform: rotateX(480deg) rotateY(960deg) rotateZ(0deg) }
+        // }
+
+        .roll{
+            animation-name: rotate;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+        }
+
+        @keyframes rotate {
             10% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) }
-            30% { transform: rotateX(120deg) rotateY(240deg) rotateZ(0deg) translateX(40px) translateY(40px) }
-            50% { transform: rotateX(240deg) rotateY(480deg) rotateZ(0deg) translateX(-40px) translateY(-40px) }
+            30% { transform: rotateX(120deg) rotateY(240deg) rotateZ(0deg) }
+            50% { transform: rotateX(240deg) rotateY(480deg) rotateZ(0deg) translateX(0px) translateY(0px) }
             70% { transform: rotateX(360deg) rotateY(720deg) rotateZ(0deg) }
             90% { transform: rotateX(480deg) rotateY(960deg) rotateZ(0deg) }
         }
