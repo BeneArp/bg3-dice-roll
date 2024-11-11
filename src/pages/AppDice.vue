@@ -6,9 +6,10 @@ import { store } from '../store';
         data(){
             return{
                 stat: store.userStat.toUpperCase(),
+                originalStat: store.userStat,
                 userClass: store.userClass,
                 pcNumber: 0,
-                userNumber: 1,
+                userNumber: 20,
                 rolling: false,
                 loading: true,
                 bonus: 0,
@@ -24,34 +25,36 @@ import { store } from '../store';
             rollDice(){
                 this.rolling = true;
                 this.userNumber = Math.floor((Math.random() * 20) + 1);
-                setTimeout(() => this.rolling = false, 2000);
-
                 // controllo che il numero dell'utente non sia un 1 o un 20
-                if(this.userNumber !== 1 && this.userNumber !== 20){
+                // if(this.userNumber !== 1 && this.userNumber !== 20){
 
-                    // ciclo le statistiche della classe scelta dall'utente
-                    this.userClass.stats.forEach(stat => {
-                        
-                        // prendo il nome della statistica che corrisponde a quella scelta dall'utente
-                        if(stat.name === store.userStat){
+                // }
+                setTimeout(() => this.rolling = false, 2000);
+            },
+            getBonus(){
 
-                            //console.log(stat.name);
-                            // assegno un bonus di un punto per ogni due numeri sopra il 10
-                            if(stat.value >= 12){
-                                // arrotondo il bonus per difetto
-                                this.bonus = Math.floor((stat.value - 10)/2);
-                                console.log(this.bonus);
+                // ciclo le statistiche della classe scelta dall'utente
+                this.userClass.stats.forEach(stat => {
+                    
+                    // prendo il nome della statistica che corrisponde a quella scelta dall'utente
+                    if(stat.name === store.userStat){
 
-                            // se il valore della statistica è minore di 10 assegno un malus con la stessa logica del bonus
-                            }else if(stat.value <= 8){
-                                this.bonus = -( Math.floor((10 - stat.value)/2));
-                                console.log(this.bonus);   
-                            }else{
-                                this.bonus = 0;
-                            }
+                        //console.log(stat.name);
+                        // assegno un bonus di un punto per ogni due numeri sopra il 10
+                        if(stat.value >= 12){
+                            // arrotondo il bonus per difetto
+                            this.bonus = Math.floor((stat.value - 10)/2);
+                            console.log(this.bonus);
+
+                        // se il valore della statistica è minore di 10 assegno un malus con la stessa logica del bonus
+                        }else if(stat.value <= 8){
+                            this.bonus = -( Math.floor((10 - stat.value)/2));
+                            console.log(this.bonus);   
+                        }else{
+                            this.bonus = 0;
                         }
-                    });
-                }
+                    }
+                });
             }
         },
 
@@ -61,6 +64,7 @@ import { store } from '../store';
             this.pcNumber = Math.floor((Math.random() * 20) + 1);
             this.randomFace;
             setTimeout(() => this.loading = false, 1000);
+            this.getBonus();
         }
     }
 
@@ -119,6 +123,23 @@ import { store } from '../store';
 
         </div>
 
+        <div  v-for="stat in this.userClass.stats">
+
+            <div class="mx-auto mt-16 bonus" v-if="this.bonus !== 0 && stat.name === this.originalStat">
+            
+                <div class="text-white text-3xl">
+                    <span v-if="this.bonus >= 1" class="text-xl">+</span>
+                    {{ this.bonus }}
+                </div>
+                <div><img class="mx-auto" :src="stat.logo" :alt="stat.name"></div>
+                <div class="pb-2 text-xl">{{ stat.name }}</div>
+    
+                <div class="bonus-overlay mx-auto"></div>
+            </div>
+
+        </div>
+        
+
     </div>  
 
 </template>
@@ -137,7 +158,7 @@ import { store } from '../store';
         }
 
         .base-container{
-            width: 35%;
+            width: 30%;
             height: 750px;
             border-top: 4px solid rgb(187, 166, 73);
             border-bottom: 4px solid rgb(187, 166, 73);
@@ -147,16 +168,47 @@ import { store } from '../store';
         }
 
         .overlay-container{
-            width: 130%;
-            height: 530px;
+            width: 135%;
+            height: 580px;
             border: 2px solid rgb(187, 166, 73);
             position: absolute;
-            left: -80%;
+            left: -85%;
             top: 50%;
             transform: translate(50%, -50%);
             z-index: -10;
         }
 
+        .bonus{
+            background: linear-gradient(0deg, rgba(2,0,36,1) 0%,rgba(51,34,47,1));
+            width: 11%;
+            //height: 100px;
+            border: 2px solid rgb(187, 166, 73);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom: none;
+            position: relative;
+            text-align: center;
+            color: rgb(187, 166, 73) !important;
+
+            .bonus-overlay{
+                background: rgba(51,34,47,1);
+                border-top: 2px solid rgb(187, 166, 73);
+                border-right: 2px solid rgb(187, 166, 73);
+                //background-color: white;
+                width: 30%;
+                height: 30px;
+                position: absolute;
+                top: -3%;
+                left: 50%;
+                //transform: translate(-50%);
+                transform: translate(-56%)rotate(-45deg);
+                z-index: -1;
+            }
+
+            img{
+                width: 65%;
+            }
+        }
 
 
         // dado
