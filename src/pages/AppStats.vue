@@ -46,7 +46,7 @@ import { store } from '../store';
       <span class="loader"></span>
     </div>
 
-    <div v-else>
+    <div v-else class="mt-12 pt-2">
         <h1 class="mb-8 mx-auto w-fit">Scegli la statisica su cui effettuare il tiro</h1>
 
         <div class="rounded-lg w-full main-container p-5 pt-10 pb-10  items-stretch gap-8 text-center">

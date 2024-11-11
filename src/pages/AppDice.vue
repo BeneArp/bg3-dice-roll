@@ -6,16 +6,12 @@ import { store } from '../store';
         data(){
             return{
                 stat: store.userStat.toUpperCase(),
+                userClass: store.userClass,
                 pcNumber: 0,
                 userNumber: 1,
-                // sides: 20,
-                // initialSide: 1,
-                // lastFace: undefined,
-                // // timeoutId: undefined,
-                // transitionDuration: 500,
-                // animationDuration: 3000,
                 rolling: false,
                 loading: true,
+                bonus: 0,
             }
         },
 
@@ -29,31 +25,39 @@ import { store } from '../store';
                 this.rolling = true;
                 this.userNumber = Math.floor((Math.random() * 20) + 1);
                 setTimeout(() => this.rolling = false, 2000);
+
+                // controllo che il numero dell'utente non sia un 1 o un 20
+                if(this.userNumber !== 1 && this.userNumber !== 20){
+
+                    // ciclo le statistiche della classe scelta dall'utente
+                    this.userClass.stats.forEach(stat => {
+                        
+                        // prendo il nome della statistica che corrisponde a quella scelta dall'utente
+                        if(stat.name === store.userStat){
+
+                            //console.log(stat.name);
+                            // assegno un bonus di un punto per ogni due numeri sopra il 10
+                            if(stat.value >= 12){
+                                // arrotondo il bonus per difetto
+                                this.bonus = Math.floor((stat.value - 10)/2);
+                                console.log(this.bonus);
+
+                            // se il valore della statistica è minore di 10 assegno un malus con la stessa logica del bonus
+                            }else if(stat.value <= 8){
+                                this.bonus = -( Math.floor((10 - stat.value)/2));
+                                console.log(this.bonus);   
+                            }else{
+                                this.bonus = 0;
+                            }
+                        }
+                    });
+                }
             }
-
-            // randomFace() {
-            //     var face = Math.floor(Math.random() * sides) + initialSide;
-            //     this.lastFace = face == lastFace ? randomFace() : face;
-            //     return face;
-            // },
-
-            // getNumber(){
-            //     this.rolling = true;
-            //     clearTimeout(timeoutId);
-
-            //     var timeoutId = setTimeout(function () {
-            //         this.rolling = false;
-
-            //         rollTo(randomFace());
-            //     }, this.animationDuration);
-
-            //     return false;
-            // }
         },
 
         mounted(){
-            console.log(store.userClass);
-            console.log(store.userStat);
+            //console.log(this.userClass.stats);
+            //console.log(store.userStat);
             this.pcNumber = Math.floor((Math.random() * 20) + 1);
             this.randomFace;
             setTimeout(() => this.loading = false, 1000);
@@ -68,9 +72,9 @@ import { store } from '../store';
       <span class="loader"></span>
     </div>
 
-    <div class="wrapper" v-else>
+    <div class="wrapper rounded-lg" v-else>
 
-        <div class="text-center font-bold text-3xl mb-12">
+        <div class="text-center font-bold text-3xl mb-8 mt-8">
             <h2>PROVA DI</h2>
             <h2>{{ stat }}</h2>
         </div>
@@ -134,7 +138,7 @@ import { store } from '../store';
 
         .base-container{
             width: 35%;
-            height: 850px;
+            height: 750px;
             border-top: 4px solid rgb(187, 166, 73);
             border-bottom: 4px solid rgb(187, 166, 73);
             position: relative;
@@ -143,11 +147,11 @@ import { store } from '../store';
         }
 
         .overlay-container{
-            width: 140%;
-            height: 600px;
+            width: 130%;
+            height: 530px;
             border: 2px solid rgb(187, 166, 73);
             position: absolute;
-            left: -90%;
+            left: -80%;
             top: 50%;
             transform: translate(50%, -50%);
             z-index: -10;
@@ -208,7 +212,7 @@ import { store } from '../store';
         }
 
         .content {
-            margin: 20% auto;
+            margin: 15% auto;
             position: relative;
             width: $containerWidth;
             height: $containerHeight;

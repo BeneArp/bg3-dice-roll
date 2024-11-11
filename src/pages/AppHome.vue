@@ -42,7 +42,7 @@ export default {
       <span class="loader"></span>
     </div>
 
-    <div v-else>
+    <div v-else class="mt-12 pt-2">
       <h1 class="mb-8 mx-auto w-fit">Scegli una classe</h1>
 
       <div class="rounded-lg w-full main-container p-5 grid grid-cols-4 items-stretch gap-8">
@@ -59,59 +59,14 @@ export default {
                   <p>{{ item.description }}</p>
                   <div class="grid grid-cols-6">
 
-                      <span class="font-bold" v-for="stat in item.stats">
-                          <div class="mt-3 text-yellow-200">
-                              {{ stat.lable }}
-                          </div>
-                          <div class="mb-3">
-                              {{ stat.value }}
-                          </div>
-                      </span>
-
-                      <!-- <span class="font-bold">
-                          <div class="mt-3 text-yellow-200">
-                              DES
-                          </div>
-                          <div class="mb-3">
-                              {{ item.stats.destrezza }}
-                          </div>
-                      </span>
-
-                      <span class="font-bold">
-                          <div class="mt-3 text-yellow-200">
-                              COS
-                          </div>
-                          <div class="mb-3">
-                              {{ item.stats.costituzione }}
-                          </div>
-                      </span>
-
-                      <span class="font-bold">
-                          <div class="mt-3 text-yellow-200">
-                              INT
-                          </div>
-                          <div class="mb-3">
-                              {{ item.stats.intelligenza }}
-                          </div>
-                      </span>
-
-                      <span class="font-bold">
-                          <div class="mt-3 text-yellow-200">
-                              SAG
-                          </div>
-                          <div class="mb-3">
-                              {{ item.stats.saggezza }}
-                          </div>
-                      </span>
-
-                      <span class="font-bold">
-                          <div class="mt-3 text-yellow-200">
-                              CAR
-                          </div>
-                          <div class="mb-3">
-                              {{ item.stats.carisma }}
-                          </div>
-                      </span> -->
+                    <span class="font-bold" v-for="stat in item.stats">
+                        <div class="mt-3 text-yellow-200">
+                            {{ stat.lable }}
+                        </div>
+                        <div class="mb-3">
+                            {{ stat.value }}
+                        </div>
+                    </span>
 
                   </div>
               </div>
