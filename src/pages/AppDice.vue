@@ -135,6 +135,7 @@ import { store } from '../store';
                 <div class="pb-2 text-xl">{{ stat.name }}</div>
     
                 <div class="bonus-overlay mx-auto"></div>
+                <div class="bonus-overlay-arrow mx-auto"></div>
             </div>
 
         </div>
@@ -179,30 +180,47 @@ import { store } from '../store';
         }
 
         .bonus{
-            background: linear-gradient(0deg, rgba(2,0,36,1) 0%,rgba(51,34,47,1));
+            background: linear-gradient(0deg, rgba(2,0,36,0.5) 0%,rgba(51,34,47,1));
             width: 11%;
-            //height: 100px;
-            border: 2px solid rgb(187, 166, 73);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border: solid 2px transparent;
+            border-radius: 12px;
+            background-image: linear-gradient( rgba(51,34,47,1) 0%, rgba(2,0,36,0.5)), 
+                                linear-gradient(to bottom, rgba(187, 166, 73, 0.8), rgba(0, 0, 0, 0));
+            background-origin: border-box;
+            background-clip: content-box, border-box;
             border-bottom: none;
             position: relative;
             text-align: center;
             color: rgb(187, 166, 73) !important;
 
             .bonus-overlay{
-                background: rgba(51,34,47,1);
-                border-top: 2px solid rgb(187, 166, 73);
-                border-right: 2px solid rgb(187, 166, 73);
-                //background-color: white;
-                width: 30%;
-                height: 30px;
+                width: 0; 
+                height: 0; 
+                border-left:8px solid transparent;
+                border-right:8px solid transparent;
+                
+                border-bottom:8px solid rgb(187, 166, 73);
                 position: absolute;
-                top: -3%;
+                top: -5%;
                 left: 50%;
-                //transform: translate(-50%);
-                transform: translate(-56%)rotate(-45deg);
-                z-index: -1;
+
+                transform: translate(-50%);
+                z-index: 12;
+            }
+
+            .bonus-overlay-arrow{
+                width: 0; 
+                height: 0; 
+                border-left: 14px solid transparent;
+                border-right: 14px solid transparent;
+                
+                border-bottom: 14px solid rgba(51,34,47,1);
+                position: absolute;
+                top: -4%;
+                left: 50%;
+
+                transform: translate(-50%);
+                z-index: 12;
             }
 
             img{
