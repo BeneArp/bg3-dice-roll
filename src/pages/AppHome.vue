@@ -59,16 +59,16 @@ export default {
                   <p>{{ item.description }}</p>
                   <div class="grid grid-cols-6">
 
-                      <span class="font-bold">
+                      <span class="font-bold" v-for="stat in item.stats">
                           <div class="mt-3 text-yellow-200">
-                              FOR
+                              {{ stat.lable }}
                           </div>
                           <div class="mb-3">
-                              {{ item.stats.forza }}
+                              {{ stat.value }}
                           </div>
                       </span>
 
-                      <span class="font-bold">
+                      <!-- <span class="font-bold">
                           <div class="mt-3 text-yellow-200">
                               DES
                           </div>
@@ -111,7 +111,7 @@ export default {
                           <div class="mb-3">
                               {{ item.stats.carisma }}
                           </div>
-                      </span>
+                      </span> -->
 
                   </div>
               </div>
