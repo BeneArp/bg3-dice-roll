@@ -1,4 +1,5 @@
 <script>
+import { Logger } from 'sass';
 import { store } from '../store';
 
     export default{
@@ -8,12 +9,15 @@ import { store } from '../store';
                 stat: store.userStat.toUpperCase(),
                 originalStat: store.userStat,
                 userClass: store.userClass,
-                pcNumber: 0,
+                pcNumber: '',
                 userNumber: 20,
-                result: 0,
+                resultNumber: 0,
+                result: '',
+                critic: false,
                 rolling: false,
                 loading: true,
                 bonus: 0,
+                error: '',
             }
         },
 
@@ -24,52 +28,87 @@ import { store } from '../store';
 
         methods:{
             rollDice(){
+                this.pcNumber = Math.floor((Math.random() * 20) + 1);
+                this.result = '';
+                this.resultNumber = 0;
                 this.rolling = true;
                 this.userNumber = Math.floor((Math.random() * 20) + 1);
                 setTimeout(() => this.rolling = false, 2000);
 
                 // controllo che il numero dell'utente non sia un 1 o un 20
                 if(this.userNumber !== 1 && this.userNumber !== 20){
-                    this.result = this.userNumber + this.bonus
-                    console.log(this.result);
+                    setTimeout(() =>  this.resultNumber = this.userNumber + this.bonus, 3000);
                 }else{
                     //this.bonus = 0;
-                    this.result = 0;
+                    this.resultNumber = 0;
                 }
+
+                setTimeout(() =>  this.getResult(), 4200);
             },
             getBonus(){
 
-                // ciclo le statistiche della classe scelta dall'utente
-                this.userClass.stats.forEach(stat => {
-                    
-                    // prendo il nome della statistica che corrisponde a quella scelta dall'utente
-                    if(stat.name === store.userStat){
+                if(this.userClass.stats){
+                    // ciclo le statistiche della classe scelta dall'utente
+                    this.userClass.stats.forEach(stat => {
+                        
+                        // prendo il nome della statistica che corrisponde a quella scelta dall'utente
+                        if(stat.name === store.userStat){
 
-                        //console.log(stat.name);
-                        // assegno un bonus di un punto per ogni due numeri sopra il 10
-                        if(stat.value >= 12){
-                            // arrotondo il bonus per difetto
-                            this.bonus = Math.floor((stat.value - 10)/2);
-                            console.log(this.bonus);
+                            //console.log(stat.name);
+                            // assegno un bonus di un punto per ogni due numeri sopra il 10
+                            if(stat.value >= 12){
+                                // arrotondo il bonus per difetto
+                                this.bonus = Math.floor((stat.value - 10)/2);
+                                //console.log(this.bonus);
 
-                        // se il valore della statistica è minore di 10 assegno un malus con la stessa logica del bonus
-                        }else if(stat.value <= 8){
-                            this.bonus = -( Math.floor((10 - stat.value)/2));
-                            console.log(this.bonus);   
-                        }else{
-                            this.bonus = 0;
+                            // se il valore della statistica è minore di 10 assegno un malus con la stessa logica del bonus
+                            }else if(stat.value <= 8){
+                                this.bonus = -( Math.floor((10 - stat.value)/2));
+                                //console.log(this.bonus);   
+                            }else{
+                                this.bonus = 0;
+                            }
                         }
-                    }
-                });
+                    });
+
+                }else{
+                    this.error = 'Devi prima selezionare una classe'
+                }
+
+                
+            },
+
+            getResult(){
+                if(this.userNumber === 20){
+                    this.result = 'SUCCESSO'
+                    this.critic = true
+
+                }else if(this.userNumber === 1){
+                    this.result = 'FALLIMENTO'
+                    this.critic = true
+
+                }else if(this.resultNumber >= this.pcNumber){
+                    this.result = 'SUCCESSO'
+                    this.critic = false
+
+                }else{
+                    this.result = 'FALLIMENTO'
+                    this.critic = false
+
+                }
+
+                console.log(this.result);
+                
             }
         },
 
         mounted(){
             //console.log(this.userClass.stats);
             //console.log(store.userStat);
-            this.pcNumber = Math.floor((Math.random() * 20) + 1);
+            // this.pcNumber = Math.floor((Math.random() * 20) + 1);
             this.randomFace;
             setTimeout(() => this.loading = false, 1000);
+            this.error = '';
             this.getBonus();
         }
     }
@@ -95,42 +134,47 @@ import { store } from '../store';
             <div class="text-center font-bold text-3xl">
                 <h2>CLASSE</h2>
                 <h2>DIFFICOLTÀ</h2>
-                <div class="text-7xl">
+                <div class="text-7xl min-h-20">
                     {{ pcNumber }}
                 </div>
             </div>
 
             <div class="content">
-                    <div class="die" :class = "(this.rolling) ? 'roll' : ''" @click="this.rollDice" :data-face="userNumber">
-                        <figure class="face face-1"></figure>
-                        <figure class="face face-2"></figure>
-                        <figure class="face face-3"></figure>
-                        <figure class="face face-4"></figure>
-                        <figure class="face face-5"></figure>
-                        <figure class="face face-6"></figure>
-                        <figure class="face face-7"></figure>
-                        <figure class="face face-8"></figure>
-                        <figure class="face face-9"></figure>
-                        <figure class="face face-10"></figure>
-                        <figure class="face face-11"></figure>
-                        <figure class="face face-12"></figure>
-                        <figure class="face face-13"></figure>
-                        <figure class="face face-14"></figure>
-                        <figure class="face face-15"></figure>
-                        <figure class="face face-16"></figure>
-                        <figure class="face face-17"></figure>
-                        <figure class="face face-18"></figure>
-                        <figure class="face face-19"></figure>
-                        <figure class="face face-20"></figure>
-                    </div>
-                    <figure class="bonus-number" v-if="!this.rolling && this.result !== 0">
-                        <div>
-                            <span>
-                                {{this.result}}
-                            </span>
-                        </div>
-                    </figure>
+                <div class="die" :class = "(this.rolling) ? 'roll' : ''" @click="this.rollDice" :data-face="userNumber">
+                    <figure class="face face-1"></figure>
+                    <figure class="face face-2"></figure>
+                    <figure class="face face-3"></figure>
+                    <figure class="face face-4"></figure>
+                    <figure class="face face-5"></figure>
+                    <figure class="face face-6"></figure>
+                    <figure class="face face-7"></figure>
+                    <figure class="face face-8"></figure>
+                    <figure class="face face-9"></figure>
+                    <figure class="face face-10"></figure>
+                    <figure class="face face-11"></figure>
+                    <figure class="face face-12"></figure>
+                    <figure class="face face-13"></figure>
+                    <figure class="face face-14"></figure>
+                    <figure class="face face-15"></figure>
+                    <figure class="face face-16"></figure>
+                    <figure class="face face-17"></figure>
+                    <figure class="face face-18"></figure>
+                    <figure class="face face-19"></figure>
+                    <figure class="face face-20"></figure>
                 </div>
+                <figure class="bonus-number" v-if="!this.rolling && this.resultNumber !== 0 && this.result !== 1 && this.resultNumber !== 20">
+                    <div  @click="this.rollDice">
+                        <span>
+                            {{this.resultNumber}}
+                        </span>
+                    </div>
+                </figure>
+            </div>
+
+            <div class="roll-result text-center mt-20 text-4xl" v-if="this.result">
+                <h2>{{ this.result }}</h2>
+                <h2 class="pt-1" v-if="this.critic">CRITICO</h2>
+            </div>
 
             <div class="dice-container overlay-container"></div>
 
@@ -138,7 +182,7 @@ import { store } from '../store';
 
         <div  v-for="stat in this.userClass.stats">
 
-            <div class="mx-auto mt-16 bonus" v-if="this.bonus !== 0 && stat.name === this.originalStat">
+            <div class="mx-auto mt-10 bonus" v-if="this.bonus !== 0 && stat.name === this.originalStat">
             
                 <div class="text-white text-3xl">
                     <span v-if="this.bonus >= 1" class="text-xl">+</span>
@@ -153,6 +197,9 @@ import { store } from '../store';
 
         </div>
         
+        <div class="error-container flex justify-center pt-[25em]" v-if="this.error !== ''">
+            <router-link :to="{name:'home'}" class="text-2xl">{{ this.error }}</router-link>
+        </div>
 
     </div>  
 
@@ -162,8 +209,15 @@ import { store } from '../store';
    
    .wrapper{
         cursor: default;
-        font-family: "Alegreya Sans", sans-serif !important;
-        font-weight: 700 !important;
+
+        .error-container{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.4);
+            }
 
         .dice-container{
             margin: 0 auto;
@@ -334,6 +388,7 @@ import { store } from '../store';
                     // width:fit-content;
                     display: inline-block;
                     height: 62.5px;
+                    width: 58.5px;
                     background-color: #615c74;
                     //background-color: red;
                     padding: 0 10px;
