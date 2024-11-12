@@ -10,6 +10,7 @@ import { store } from '../store';
                 userClass: store.userClass,
                 pcNumber: 0,
                 userNumber: 20,
+                result: 0,
                 rolling: false,
                 loading: true,
                 bonus: 0,
@@ -25,11 +26,16 @@ import { store } from '../store';
             rollDice(){
                 this.rolling = true;
                 this.userNumber = Math.floor((Math.random() * 20) + 1);
-                // controllo che il numero dell'utente non sia un 1 o un 20
-                // if(this.userNumber !== 1 && this.userNumber !== 20){
-
-                // }
                 setTimeout(() => this.rolling = false, 2000);
+
+                // controllo che il numero dell'utente non sia un 1 o un 20
+                if(this.userNumber !== 1 && this.userNumber !== 20){
+                    this.result = this.userNumber + this.bonus
+                    console.log(this.result);
+                }else{
+                    //this.bonus = 0;
+                    this.result = 0;
+                }
             },
             getBonus(){
 
@@ -117,6 +123,13 @@ import { store } from '../store';
                         <figure class="face face-19"></figure>
                         <figure class="face face-20"></figure>
                     </div>
+                    <figure class="bonus-number" v-if="!this.rolling && this.result !== 0">
+                        <div>
+                            <span>
+                                {{this.result}}
+                            </span>
+                        </div>
+                    </figure>
                 </div>
 
             <div class="dice-container overlay-container"></div>
@@ -289,6 +302,46 @@ import { store } from '../store';
             perspective: 1500px;
         }
 
+        .bonus-number{
+            $horizontalMargin: -$faceWidth*0.5;
+                
+            position: absolute;
+            left: 50%;
+            top: 22.5%;
+            margin: 0 $horizontalMargin;
+            border-left: $faceWidth*0.5 solid transparent;
+            border-right: $faceWidth*0.5 solid transparent;
+            border-bottom: $faceHeight solid transparent;
+            width: 0px;
+            height: 0px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            
+            div {
+                position: absolute;
+                top: $faceHeight*0.25;
+                left: -$faceWidth;
+                color: #fff;
+                text-shadow: 1px 1px 3px #000;
+                font-size: $faceHeight*0.5;
+                text-align: center;
+                line-height: $faceHeight*0.9;
+                width: $faceWidth*2;
+                height: $faceHeight;
+                //margin-bottom: 0.2em
+
+                span{
+                    // width:fit-content;
+                    display: inline-block;
+                    height: 62.5px;
+                    background-color: #615c74;
+                    //background-color: red;
+                    padding: 0 10px;
+                    border-radius: 50%;
+                }
+            }
+        }
+
         .die {
             position: absolute;
             width: 100%;
@@ -432,6 +485,7 @@ import { store } from '../store';
                     margin: 20px 10px;
                 }
             }
+            
         }
 
 
