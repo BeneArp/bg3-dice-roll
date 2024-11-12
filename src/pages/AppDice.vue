@@ -37,7 +37,7 @@ import { store } from '../store';
 
                 // controllo che il numero dell'utente non sia un 1 o un 20
                 if(this.userNumber !== 1 && this.userNumber !== 20){
-                    setTimeout(() =>  this.resultNumber = this.userNumber + this.bonus, 3000);
+                    setTimeout(() =>  this.resultNumber = this.userNumber + this.bonus, 4000);
                 }else{
                     //this.bonus = 0;
                     this.resultNumber = 0;
@@ -162,18 +162,18 @@ import { store } from '../store';
                     <figure class="face face-19"></figure>
                     <figure class="face face-20"></figure>
                 </div>
-                <figure class="bonus-number" v-if="!this.rolling && this.resultNumber !== 0 && this.result !== 1 && this.resultNumber !== 20">
+                <figure class="bonus-number fade-in" v-if="!this.rolling && this.resultNumber !== 0 && this.result !== 1 && this.resultNumber !== 20">
                     <div  @click="this.rollDice">
-                        <span>
+                        <span :class="this.result === 'FALLIMENTO' ? 'text-red-700' : ''">
                             {{this.resultNumber}}
                         </span>
                     </div>
                 </figure>
             </div>
 
-            <div class="roll-result text-center mt-20 text-4xl" v-if="this.result">
-                <h2>{{ this.result }}</h2>
-                <h2 class="pt-1" v-if="this.critic">CRITICO</h2>
+            <div class="roll-result text-center mt-20 text-4xl fade-in" v-if="this.result">
+                <h2 :class="this.result === 'FALLIMENTO' ? 'text-red-700' : ''">{{ this.result }}</h2>
+                <h2 :class="this.result === 'FALLIMENTO' ? 'text-red-700' : ''" class="pt-1" v-if="this.critic">CRITICO</h2>
             </div>
 
             <div class="dice-container overlay-container"></div>
@@ -206,7 +206,24 @@ import { store } from '../store';
 </template>
 
 <style lang="scss" scoped>
-   
+
+    .fade-in {
+        opacity: 1;
+        animation-name: fadeInOpacity;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in;
+        animation-duration: 0.5s;
+    }
+
+    @keyframes fadeInOpacity {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    
    .wrapper{
         cursor: default;
 
