@@ -182,7 +182,7 @@ import { store } from '../store';
 
         <div  v-for="stat in this.userClass.stats">
 
-            <div class="mx-auto mt-10 bonus" v-if="this.bonus !== 0 && stat.name === this.originalStat">
+            <div class="mx-auto mt-12 bonus" :class="!this.rolling && this.userNumber !== 0 ? 'bonus-effect' : ''" v-if="this.bonus !== 0 && stat.name === this.originalStat">
             
                 <div class="text-white text-3xl">
                     <span v-if="this.bonus >= 1" class="text-xl">+</span>
@@ -221,6 +221,31 @@ import { store } from '../store';
         }
         100% {
             opacity: 1;
+        }
+    }
+    
+    .bonus-effect{
+        animation-name: scale;
+        animation-duration: 0.8s;
+        animation-timing-function: linear;
+        animation-delay: 0.8s;
+    }
+
+    @keyframes scale {
+        0%{
+            transform: scale(1);
+        }
+
+        30%{
+            transform: scale(1.4);
+        }
+
+        90%{
+            transform: scale(1.4);
+        }
+
+        100%{
+            transform: scale(1);
         }
     }
     
