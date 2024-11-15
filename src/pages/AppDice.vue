@@ -37,7 +37,7 @@ import { store } from '../store';
 
                 // controllo che il numero dell'utente non sia un 1 o un 20
                 if(this.userNumber !== 1 && this.userNumber !== 20){
-                    setTimeout(() =>  this.resultNumber = this.userNumber + this.bonus, 4000);
+                    setTimeout(() =>  this.resultNumber = this.userNumber + this.bonus, 3690);
                 }else{
                     //this.bonus = 0;
                     this.resultNumber = 0;
@@ -180,22 +180,44 @@ import { store } from '../store';
 
         </div>
 
-        <div  v-for="stat in this.userClass.stats">
+        <div class="relative">
 
-            <div class="mx-auto mt-12 bonus" :class="!this.rolling && this.userNumber !== 0 ? 'bonus-effect' : ''" v-if="this.bonus !== 0 && stat.name === this.originalStat">
-            
+            <div  v-for="stat in this.userClass.stats">
+
+            <div class="mx-auto mt-12 bonus" :class="!this.rolling && this.pcNumber !== '' && this.userNumber !== 1 && this.userNumber !== 20 ? 'bonus-effect' : ''" v-if="this.bonus !== 0 && stat.name === this.originalStat">
+
                 <div class="text-white text-3xl">
                     <span v-if="this.bonus >= 1" class="text-xl">+</span>
                     {{ this.bonus }}
                 </div>
                 <div><img class="mx-auto" :src="stat.logo" :alt="stat.name"></div>
                 <div class="pb-2 text-xl">{{ stat.name }}</div>
-    
+
                 <div class="bonus-overlay mx-auto"></div>
                 <div class="bonus-overlay-arrow mx-auto"></div>
             </div>
 
+            </div>
+
+            <div class="sparkle-effect mx-auto w-fit" :class="!this.rolling && this.pcNumber !== '' && this.userNumber !== 1 && this.userNumber !== 20 ? 'bonus-sparks' : ''">
+
+                <div class="big-spark mx-auto"></div>
+
+                <div class="grid grid-cols-3 w-[18px] gap-2 mt-2 relative">
+                    <div class="little-spark spark-1"></div>
+                    <div class="little-spark spark-2"></div>
+                    <div class="little-spark spark-3"></div>
+                    <div class="little-spark spark-4"></div>
+                    <div class="little-spark spark-5"></div>
+                    <div class="little-spark spark-6"></div>
+                    <div class="little-spark spark-7"></div>
+                    <div class="little-spark spark-8"></div>
+                    <div class="little-spark spark-9"></div>
+                </div>
+
+            </div>
         </div>
+        
         
         <div class="error-container flex justify-center pt-[25em]" v-if="this.error !== ''">
             <router-link :to="{name:'home'}" class="text-2xl">{{ this.error }}</router-link>
@@ -207,6 +229,7 @@ import { store } from '../store';
 
 <style lang="scss" scoped>
 
+    // EFFETTI
     .fade-in {
         opacity: 1;
         animation-name: fadeInOpacity;
@@ -248,7 +271,41 @@ import { store } from '../store';
             transform: scale(1);
         }
     }
+
+    .bonus-sparks{
+        animation-name: move;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        animation-delay: 1.5s;
+    }
+
+    @keyframes move {
+        0%{
+            opacity: 0;
+        }
+
+        30%{
+            transform: translate(0px, -100px);
+            opacity: 1;
+        }
+
+        50%{
+            transform: translate(0px, -250px);
+            z-index: 100;
+        }
+
+        90%{
+            transform: translate(0px, -460px);
+            opacity: 1;
+        }
+
+        100%{
+            transform: translate(0px, -460px);
+            opacity: 0;
+        }
+    }
     
+    // MAIN
    .wrapper{
         cursor: default;
 
@@ -288,6 +345,7 @@ import { store } from '../store';
             z-index: -10;
         }
 
+        // BONUS
         .bonus{
             background: linear-gradient(0deg, rgba(2,0,36,0.5) 0%,rgba(51,34,47,1));
             width: 11%;
@@ -337,8 +395,137 @@ import { store } from '../store';
             }
         }
 
+        .sparkle-effect{
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            z-index: -2;
+            opacity: 0;
 
-        // dado
+            .big-spark{
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: rgb(231 216 163);
+                box-shadow:
+                    0 0 16px 10px rgb(231 216 163), 
+                    0 0 9.5px 7.5px rgb(198 182 120),
+                    0 0 13.5px 9.25px rgb(97 85 49);
+            }
+
+            .little-spark{
+                width: 1px;
+                height: 1px;
+                border-radius: 50%;
+                background-color: rgb(226, 222, 209);
+                box-shadow:
+                    0 0 3px 4px rgb(226, 222, 209),
+                    0 0 1px 1px rgb(231 216 163),
+                    0 0 2px 2.5px rgb(97 85 49);
+            }
+
+            .spark-1{
+                position: absolute;
+                left: -8px;
+                top: 10px;
+                background-color: rgb(226, 215, 178);
+                box-shadow:
+                    0 0 4px 4.5px rgb(226, 215, 178),
+                    0 0 1px 1px rgb(231 216 163),
+                    0 0 2px 2.5px rgb(97 85 49);
+            }
+
+            .spark-2{
+                position: absolute;
+                left: 8px;
+                top: 26px;
+                background-color: rgb(240, 238, 231);
+                box-shadow:
+                    0 0 8px 7px rgb(240, 238, 231),
+                    0 0 2px 2px rgb(161, 154, 127),
+                    0 0 3px 3.5px rgb(107, 102, 85);
+            }
+
+            .spark-3{
+                position: absolute;
+                left: 15px;
+                top: 10px;
+                background-color: rgb(255, 225, 126);
+                box-shadow:
+                    0 0 2px 2.5px rgb(255, 225, 126),
+                    0 0 2px 2px rgb(214, 194, 122),
+                    0 0 3px 3.5px rgb(139, 112, 28);
+            }
+
+            .spark-4{
+                position: absolute;
+                left: -12px;
+                top: 40px;
+                background-color: rgb(255, 225, 126);
+                box-shadow:
+                    0 0 6px 5px rgb(255, 225, 126),
+                    0 0 2px 2px rgb(214, 194, 122),
+                    0 0 3px 3.5px rgb(139, 112, 28);
+            }
+            
+            .spark-5{
+                position: absolute;
+                left: 12px;
+                top: 50px;
+                background-color: rgb(226, 215, 178);
+                box-shadow:
+                    0 0 6px 5px rgb(226, 215, 178),
+                    0 0 2px 2px rgb(231 216 163),
+                    0 0 3px 3.5px rgb(97 85 49);
+            }
+
+            .spark-6{
+                position: absolute;
+                right: -14px;
+                top: -4px;
+                background-color: rgb(240, 238, 231);
+                box-shadow:
+                    0 0 6px 5px rgb(240, 238, 231),
+                    0 0 2px 2px rgb(161, 154, 127),
+                    0 0 3px 3.5px rgb(107, 102, 85);
+            }
+
+            .spark-7{
+                position: absolute;
+                right: -16px;
+                top: 38px;
+                background-color: rgb(255, 225, 126);
+                box-shadow:
+                    0 0 12px 10px rgb(255, 225, 126),
+                    0 0 2px 2px rgb(214, 194, 122),
+                    0 0 3px 3.5px rgb(139, 112, 28);
+            }
+
+            .spark-8{
+                position: absolute;
+                right: -14px;
+                top: 15px;
+                background-color: rgb(255, 225, 126);
+                box-shadow:
+                    0 0 4px 4.5px rgb(255, 225, 126),
+                    0 0 1.5px 1.5px rgb(214, 194, 122),
+                    0 0 6px 6.5px rgb(139, 112, 28);
+            }
+
+            .spark-9{
+                position: absolute;
+                left: -20px;
+                top: -9px;
+                background-color: rgb(240, 238, 231);
+                box-shadow:
+                    0 0 8px 7px rgb(240, 238, 231),
+                    0 0 2px 2px rgb(161, 154, 127),
+                    0 0 3px 3.5px rgb(107, 102, 85);
+            }
+        }
+
+
+        // DADO
         $containerWidth: 200px;
         $containerHeight: $containerWidth;
 
