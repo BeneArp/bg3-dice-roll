@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
     import AppHome from './pages/AppHome.vue';
     import AppStats from './pages/AppStats.vue';
     import AppDice from './pages/AppDice.vue';
+    import AppMatchHistory from './pages/AppMatchHistory.vue';
     import NotFound from './pages/NotFound.vue';
 
     const router = createRouter({
@@ -21,6 +22,11 @@ import { createRouter, createWebHistory } from 'vue-router';
             path: '/roll',
             name: 'roll',
             component: AppDice
+        },
+        {
+            path: '/history',
+            name: 'history',
+            component: AppMatchHistory
         },
         {
             path: '/:pathMatch(.*)*',

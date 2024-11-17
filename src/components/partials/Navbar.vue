@@ -33,7 +33,7 @@
                 <router-link :to="{name:'stats'}">Statistiche</router-link>
             </li>
             <li>
-                <router-link :to="{name:home}">Storico</router-link>
+                <router-link :to="{name:'history'}">Storico</router-link>
             </li>
             <li v-if="this.userClass !== ''">
                 <div class="class-pic">
