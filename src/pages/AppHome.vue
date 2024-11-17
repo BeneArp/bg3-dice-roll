@@ -20,7 +20,8 @@ export default {
           getUserClass(item){
               this.userClass = item;
               store.userClass = this.userClass;
-              console.log(store.userClass);
+              localStorage.setItem('userClass', JSON.stringify(this.userClass))
+              //console.log(store.userClass);
               
           }
           

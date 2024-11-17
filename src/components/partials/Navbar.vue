@@ -1,17 +1,21 @@
 <script>
-    import {store} from '../../store';
+    //import {store} from '../../store';
 
     export default{
         name: 'Navbar',
+
+        // props:{
+        //     class:Object
+        // },
         
         data(){
             return{
-                userClass: store.userClass
+                userClass: JSON.parse(localStorage.getItem('userClass')),
             }
         },
 
         mounted(){
-            console.log(this.userClass);
+            console.log(this.class);
             
         }
     }
@@ -31,7 +35,7 @@
             <li>
                 <router-link :to="{name:home}">Storico</router-link>
             </li>
-            <li>
+            <li v-if="this.userClass">
                 <div class="class-pic">
                     <img :src="this.userClass.logo" :alt="this.userClass.name">
 

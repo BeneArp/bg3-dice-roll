@@ -21,18 +21,20 @@ import { store } from '../store';
             getUserStat(stat){
                 this.userStat = stat;
                 store.userStat = this.userStat;
+                localStorage.setItem('userStat', JSON.stringify(this.userStat))
                 console.log(store.userStat);
             },
 
             randomStat(){
                 this.userStat = this.stats[(Math.floor(Math.random() * this.stats.length))];
                 store.userStat = this.userStat;
+                localStorage.setItem('userStat', JSON.stringify(this.userStat))
                 console.log(store.userStat);
             }
         },
 
         mounted(){
-            console.log(store.userClass);
+            //console.log(store.userClass);
             setTimeout(() => this.loading = false, 1000);
             
         }

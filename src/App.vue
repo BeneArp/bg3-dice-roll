@@ -1,5 +1,5 @@
 <script>
-
+//import {store} from './store';
 import Navbar from './components/partials/Navbar.vue';
 
 export default{
@@ -7,6 +7,12 @@ export default{
     components:{
       Navbar,
     },
+
+    // data(){
+    //     return{
+    //         class: store.userClass,
+    //     }
+    // }
 
 }
 

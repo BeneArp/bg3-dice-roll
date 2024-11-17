@@ -1,4 +1,6 @@
-export const store = {
+import { reactive } from "vue";
+
+export const store = reactive({
     classes:[
         {
             name: 'Barbaro',
@@ -542,7 +544,7 @@ export const store = {
 
     ],
 
-    userClass: {},
+    userClass: JSON.parse(localStorage.getItem('userClass')),
 
-    userStat: '',
-}
+    userStat: JSON.parse(localStorage.getItem('userStat')),    
+});
