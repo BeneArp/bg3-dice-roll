@@ -39,6 +39,25 @@
                 <div class="class-pic">
                     <img :src="this.userClass.logo" :alt="this.userClass.name">
 
+                    <div class="hidden info">
+
+                        <h5 class="font-bold mx-auto mt-2 mb-2 text-2xl"> {{ this.userClass.name }} </h5>
+                        <p>{{ this.userClass.description }}</p>
+
+                        <div class="grid grid-cols-6">
+
+                            <span class="font-bold" v-for="stat in this.userClass.stats">
+                                <div class="mt-3 text-yellow-200">
+                                    {{ stat.lable }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ stat.value }}
+                                </div>
+                            </span>
+
+                        </div>
+
+                    </div>
                     
                 </div>
             </li>
@@ -73,11 +92,36 @@
 
                 .class-pic{
                     background-color: rgba(51,34,47,0.5);
-                    border: 1px solid rgba(51,34,47,0.5);
+                    border: 1px solid rgba(219, 194, 146, 0.3);
                     padding: 0.2em;
                     border-radius: 50%;
                     height: 50px;
                     width: 50px;
+                    position: relative;
+
+                    // .hidden{
+                    //     display: none;
+                    // }
+
+                    .info{
+                        background: rgb(24,20,14);
+                        background: radial-gradient(circle, rgba(24,20,14,1) 0%, rgba(7,7,4,1) 100%);
+                        border: 2px solid rgb(219 194 146);
+                        border-radius: 8px;
+                        padding: 0.5em 2em;
+                        z-index: 50;
+                        min-width: 350px;
+                        text-align: center;
+                        cursor: default;
+                    }
+
+                    &:hover .info{
+                        position: absolute;
+                        top: 150%;
+                        left: -50%;
+                        transform: translate(-35%, 0%);
+                        display: block;
+                    }
                 }
             }
 
