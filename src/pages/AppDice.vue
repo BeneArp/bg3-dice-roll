@@ -199,7 +199,7 @@ import { store } from '../store';
 
             </div>
 
-            <div class="sparkle-effect mx-auto w-fit" :class="!this.rolling && this.pcNumber !== '' && this.userNumber !== 1 && this.userNumber !== 20 ? 'bonus-sparks' : ''">
+            <div class="sparkle-effect mx-auto w-fit" :class="!this.rolling && this.pcNumber !== '' && this.userNumber !== 1 && this.userNumber !== 20 ? 'bonus-sparks' : ''" v-if="this.bonus !== 0">
 
                 <div class="big-spark mx-auto"></div>
 

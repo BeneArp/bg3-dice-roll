@@ -14,6 +14,12 @@ export default{
     //     }
     // }
 
+    methods:{
+        reload(){
+            window.location.href = "http://localhost:5173/stats"
+        }
+    }
+
 }
 
 </script>
@@ -28,7 +34,7 @@ export default{
 
 
     <div class="container">
-        <router-view></router-view>
+        <router-view @chooseClass="reload()"></router-view>
     </div>
     
 

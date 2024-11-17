@@ -10,12 +10,12 @@
         
         data(){
             return{
-                userClass: JSON.parse(localStorage.getItem('userClass')),
+                userClass: '',
             }
         },
 
         mounted(){
-            console.log(this.class);
+            this.userClass = JSON.parse(localStorage.getItem('userClass'))
             
         }
     }
@@ -35,7 +35,7 @@
             <li>
                 <router-link :to="{name:home}">Storico</router-link>
             </li>
-            <li v-if="this.userClass">
+            <li v-if="this.userClass !== ''">
                 <div class="class-pic">
                     <img :src="this.userClass.logo" :alt="this.userClass.name">
 

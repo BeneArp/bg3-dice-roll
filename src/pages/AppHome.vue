@@ -20,7 +20,7 @@ export default {
           getUserClass(item){
               this.userClass = item;
               store.userClass = this.userClass;
-              localStorage.setItem('userClass', JSON.stringify(this.userClass))
+              localStorage.setItem('userClass', JSON.stringify(this.userClass));
               //console.log(store.userClass);
               
           }
@@ -49,7 +49,7 @@ export default {
       <div class="rounded-lg w-full main-container p-5 grid grid-cols-4 items-stretch gap-8">
         <!-- <Class :classes="classes"></Class> -->
 
-        <router-link :to="{name:'stats'}" v-for="item in this.classes" class="logo">
+        <router-link :to="{name:'stats'}" v-for="item in this.classes" class="logo" @click="$emit('chooseClass')">
 
           <div @click="this.getUserClass(item)">
 
