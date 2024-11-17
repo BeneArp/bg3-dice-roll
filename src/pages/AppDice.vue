@@ -18,6 +18,8 @@ import { store } from '../store';
                 loading: true,
                 bonus: 0,
                 error: '',
+                rounds: JSON.parse(localStorage.getItem('rounds')),
+                currentRound: {},
             }
         },
 
@@ -44,6 +46,10 @@ import { store } from '../store';
                 }
 
                 setTimeout(() =>  this.getResult(), 4200);
+                
+                setTimeout(() =>  this.registRound(), 4200);
+
+                
             },
             getBonus(){
 
@@ -99,6 +105,30 @@ import { store } from '../store';
 
                 console.log(this.result);
                 
+            },
+
+            registRound(){
+
+                this.currentRound = {
+                    classImg: this.userClass.logo,
+                    className: this.userClass.name,
+                    stat: this.originalStat,
+                    pcNumber: this.pcNumber,
+                    userNumber: this.userNumber,
+                    userBonus: this.bonus,
+                    result: ''
+                }
+
+                if(this.critic){
+                    this.currentRound.result = this.result + ' CRITICO'
+
+                }else{
+                    this.currentRound.result = this.result
+                }
+
+                this.rounds.push(this.currentRound);
+
+                localStorage.setItem('rounds', JSON.stringify(this.rounds));
             }
         },
 
