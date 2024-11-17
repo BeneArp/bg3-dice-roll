@@ -59,33 +59,6 @@ export default {
           <span :class="round.result === 'SUCCESSO CRITICO' || round.result === 'FALLIMENTO CRITICO' ? 'line-through' : '' ">{{ round.userBonus }}</span>
           <span :class="round.result === 'FALLIMENTO' || round.result === 'FALLIMENTO CRITICO' ? 'text-red-600' : '' ">{{ round.result }}</span>
         </div>
-        <!-- <Class :classes="classes"></Class> -->
-
-        <!-- <router-link :to="{name:'stats'}" v-for="item in this.classes" class="logo" @click="$emit('chooseClass')">
-
-          <div @click="this.getUserClass(item)">
-
-              <img :src="item.logo" :alt="item.name" class="mx-auto">
-
-              <div class="hidden info">
-                  <h5 class="font-bold mx-auto mt-2 mb-2 text-2xl"> {{ item.name }} </h5>
-                  <p>{{ item.description }}</p>
-                  <div class="grid grid-cols-6">
-
-                    <span class="font-bold" v-for="stat in item.stats">
-                        <div class="mt-3 text-yellow-200">
-                            {{ stat.lable }}
-                        </div>
-                        <div class="mb-3">
-                            {{ stat.value }}
-                        </div>
-                    </span>
-
-                  </div>
-              </div>
-          </div>
-
-        </router-link> -->
 
       </div>
     </div>

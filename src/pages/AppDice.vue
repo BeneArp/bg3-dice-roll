@@ -18,7 +18,7 @@ import { store } from '../store';
                 loading: true,
                 bonus: 0,
                 error: '',
-                rounds: JSON.parse(localStorage.getItem('rounds')),
+                rounds: [],
                 currentRound: {},
             }
         },
@@ -140,6 +140,9 @@ import { store } from '../store';
             setTimeout(() => this.loading = false, 1000);
             this.error = '';
             this.getBonus();
+            if(localStorage.getItem('rounds')){
+                this.rounds =  JSON.parse(localStorage.getItem('rounds'));
+            }
         }
     }
 
